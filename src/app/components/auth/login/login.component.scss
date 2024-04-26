@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 500px;
+}
+
+mat-card {
+  width: 80%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+
+mat-card-title{
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px; /* Adjust the margin as needed */
+}
+
+.button button {
+  margin: 0 8px; /* Adjust the margin as needed to control the spacing between buttons */
+}
+

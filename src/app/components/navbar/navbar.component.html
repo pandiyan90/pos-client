@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default bg-dark navbar-dark">
+  <div>
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/">POS</a>
+    </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/orders">Orders</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item" *ngIf="authService.isLoggedOut && authService.checkUserAuthentication">
+        <a class="nav-link active" routerLink="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.isLoggedOut && authService.checkUserAuthentication">
+        <a class="nav-link active" routerLink="/" (click)="authService.logout()"><i class="fa fa-sign-out"
+            aria-hidden="true"></i> Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
