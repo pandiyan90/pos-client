@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductComponent } from './components/inventory/product/product.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,6 +20,8 @@ import { HomeComponent } from './components/home/home.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { NewOrderComponent } from './components/new-order/new-order.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { EditOrderComponent } from './components/edit-order/edit-order.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HomeComponent,
     OrdersComponent,
     NewOrderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FooterComponent,
+    EditOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModalModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right'
     })

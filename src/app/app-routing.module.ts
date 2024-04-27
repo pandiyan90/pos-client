@@ -9,6 +9,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { EditOrderComponent } from './components/edit-order/edit-order.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
     path: 'orders',
     component: OrdersComponent,
     canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'orders/:id',
+    component: EditOrderComponent
   },
   {
     path: '**',
