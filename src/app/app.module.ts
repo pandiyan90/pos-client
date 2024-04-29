@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { DataTablesModule } from 'angular-datatables';
 
 import { ProductComponent } from './components/inventory/product/product.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -22,6 +23,12 @@ import { NewOrderComponent } from './components/new-order/new-order.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
+import { ListingBillComponent } from './components/listing-bill/listing-bill.component';
+import { EditBillComponent } from './components/edit-bill/edit-bill.component';
+import { BillComponent } from './components/bill/bill.component';
+
+import { FilterPipe } from './pipe/filter.pipe';
+import { SorterPipe } from './pipe/sorter.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +41,12 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
     NewOrderComponent,
     PageNotFoundComponent,
     FooterComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    ListingBillComponent,
+    EditBillComponent,
+    BillComponent,
+    FilterPipe,
+    SorterPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +62,8 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
     NgbModalModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right'
-    })
+    }),
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

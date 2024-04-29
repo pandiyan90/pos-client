@@ -1,4 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { ADTSettings,  } from 'angular-datatables/src/models/settings';
+import { Subject } from 'rxjs';
 import { CustomerDataService } from '../../services/customer-data.service';
 import { Order } from './order.model';
 import {NgbModal, ModalDismissReasons, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +12,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
+  dtOptions: ADTSettings = {};
+  dtTrigger = new Subject<ADTSettings>();
+
   closeResult!: string;
   constructor(private customerDataService: CustomerDataService,
               private modalService: NgbModal,
@@ -50,6 +55,27 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers', // option for server-side pagination
+      processing: true,
+      columns: [
+        { title: 'Order No', data: 'orderNumber'},
+        { title: 'Customer Name', data: 'customerName'},
+        { title: 'Customer Address', data: 'customerAddress'},
+        { title: 'Mobile Number', data: 'customerMobileNumber'},
+        { title: 'Order Total', data: 'orderTotal'},
+        { title: 'Order DueDate', data: 'orderDueDate'}
+      ]
+    };
+
+    // Trigger the table rendering after options are set
+    this.dtTrigger.next(this.dtOptions);
+    //this.dtOptions = this.customerDataService.getCustomers().catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
   onDelete(i: number) {

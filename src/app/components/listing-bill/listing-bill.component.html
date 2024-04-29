@@ -1,0 +1,94 @@
+<h1 class="text-center my-4">Számlázási lista</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 my-3 mx-auto">
+            <select [(ngModel)]="filterKey" class="form-control">
+                <option *ngFor="let col of cols" [value]="col.key">{{ col.text }}</option>
+            </select>
+        </div>
+        <div class="input col-4 mx-auto">
+            <form class="form-inline my-3">
+                <input (keyup)="onChangePhrase($event)" class="form-control mr-sm-2" type="text" placeholder="Keresés">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <button [routerLink]=[0] class="btn btn-success btn-block my-3"><i class="fa fa-plus"></i></button>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="sorter-header" *ngFor="let col of cols" (click)="onSort(col.key)"> <i
+                                *ngIf="sorterKey === col.key && sorterDirection === 1" class="fa fa-angle-up"></i>
+                            <i *ngIf="sorterKey === col.key && sorterDirection === -1" class="fa fa-angle-down"></i>
+                            {{ col.text }}
+                        </th>
+                        <th>Kezelés</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let bill of billList$ | async | filter:filterKey:phrase | sorter:sorterKey:sorterDirection ">
+                        <td>
+                            {{ bill.id}}
+                        </td>
+                        <td>
+                            {{ bill.orderID }}
+                        </td>
+                        <td>
+                            {{ bill.amount }}
+                        </td>
+                        <td>
+                            {{ bill.status }}
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-primary" [routerLink]="[bill.id]">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                                <button class="btn btn-danger" (click)="setToDelete(bill)" data-toggle="modal"
+                                    data-target="#deleteModal">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="bg-dark text-light" id="tfoot">
+                    <tr>
+                        <td colspan="9">
+                            <div class="d-flex justify-content-around">
+                                <span *ngIf="numberOfAllBills$ | async">
+                                    <b style="font-size: 18px">
+                                        ͏͏͏͏͏͏͏Összes számla: {{ numberOfAllBills$ | async }}</b>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Számla törlése</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Biztosan törölni kívánja a <strong>#{{ selectedBillToDelete.id }}</strong> számlát?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="onRemove()" class="btn btn-danger" data-dismiss="modal">Törlés</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default navbar-dark">
+    <div class="content-container">
+        <ul class="nav navbar-nav">
+            <h2>Billing</h2>
+        </ul>
+      <div>
+      <!-- Input fields for item details (name, price, quantity) -->
+      <input type="text" placeholder="Item Name" [(ngModel)]="itemName">
+      <input type="number" placeholder="Price" [(ngModel)]="itemPrice">
+      <input type="number" placeholder="Quantity" [(ngModel)]="itemQuantity">
+      <button (click)="addItem()">Add Item</button>
+    </div>
+    <div>
+      <!-- Display added items -->
+      <ul>
+        <li *ngFor="let item of items">{{ item.name }} - {{ item.price }} x {{ item.quantity }}</li>
+      </ul>
+    </div>
+    <div>
+      <!-- Display subtotal, tax, and total -->
+      <p>Subtotal: {{ calculateSubtotal() }}</p>
+      <p>Tax (10%): {{ calculateTax() }}</p>
+      <p>Total: {{ calculateTotal() }}</p>
+    </div>
+    <div>
+      <!-- Button to process payment -->
+      <button (click)="processPayment()">Process Payment</button>
+    </div>
+  </div>
+</nav>
