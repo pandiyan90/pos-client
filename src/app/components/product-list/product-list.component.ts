@@ -15,14 +15,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
   datatableElement?: DataTableDirective;
 
   dtOptions: Config = {};
-  //public dtTrigger:Subject<any> = new Subject<any>();
+  dtTrigger:Subject<any> = new Subject<any>();
   products: Product[] = [];
 
   constructor(private productService: ProductService){}
  
   ngOnInit(){
-    const that = this;
-
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -53,15 +51,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
         orderable: true
       }]
     };
-    
+    this.dtTrigger.next(this.products);
   }
 
   private getProducts(){
     this.products = this.productService.getProducts();
-    //this.dtTrigger.next(this.products);
+    this.dtTrigger.next(this.products);
   }
 
   ngOnDestroy(): void {
-    //this.dtTrigger.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 }

@@ -26,6 +26,7 @@ export class CustomerListComponent implements OnInit {
     const that = this;
 
     this.dtOptions = {
+      search: true,
       pagingType: 'full_numbers',
       pageLength: 10,
       serverSide: true,
@@ -54,7 +55,7 @@ export class CustomerListComponent implements OnInit {
           "creditLimit": 1234
       }];
       callback({
-            recordsTotal: 14,
+            recordsTotal: that.customers.length,
             recordsFiltered: 10,
             data: [],
       });

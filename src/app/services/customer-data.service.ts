@@ -80,6 +80,14 @@ export class CustomerDataService {
       orderDueDate: new Date('June 06, 1995')
     },
     {
+      orderNumber: 105,
+      customerName: 'Pranay',
+      customerAddress: 'LB Nagar',
+      customerMobileNumber: 9866093888,
+      orderTotal: 89,
+      orderDueDate: new Date('June 06, 1995')
+    },
+    {
       orderNumber: 103,
       customerName: 'Mahesh',
       customerAddress: 'Gachibowli',
@@ -100,7 +108,7 @@ export class CustomerDataService {
   getCustomerData(i: number) {
     return this.order[i];
   }
-  async getCustomers() {
+  getCustomers() {
     return this.order;
   }
   updateCustomerData(form: any, i: number) {
