@@ -26,6 +26,8 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
 import { ListingBillComponent } from './components/listing-bill/listing-bill.component';
 import { EditBillComponent } from './components/edit-bill/edit-bill.component';
 import { BillComponent } from './components/bill/bill.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { CustomerListComponent } from './components/customer-list/customer-list.component';
 
 import { FilterPipe } from './pipe/filter.pipe';
 import { SorterPipe } from './pipe/sorter.pipe';
@@ -45,6 +47,8 @@ import { SorterPipe } from './pipe/sorter.pipe';
     ListingBillComponent,
     EditBillComponent,
     BillComponent,
+    ProductListComponent,
+    CustomerListComponent,
     FilterPipe,
     SorterPipe
   ],

@@ -1,12 +1,7 @@
 export class Product {
-
-    id: number = 0;
-    name: string = '';
-    type: string = '';
-    catId: number = 0;
-    description: string = '';
-    price: number = 0;
-    featured: boolean = false;
-    active: boolean = false;
-
+    constructor(
+      public productName: string,
+      public city: string,
+      public mobile: number
+    ) {}
 }

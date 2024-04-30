@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit, OnDestroy, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { ADTSettings,  } from 'angular-datatables/src/models/settings';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { CustomerDataService } from '../../services/customer-data.service';
 import { Order } from './order.model';
@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class OrdersComponent implements OnInit {
   dtOptions: ADTSettings = {};
-  dtTrigger = new Subject<ADTSettings>();
+  dtTrigger: Subject<any> = new Subject<any>();
 
   closeResult!: string;
   constructor(private customerDataService: CustomerDataService,

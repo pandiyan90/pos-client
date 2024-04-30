@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="container text-center" style="margin: 30px;">
+        <h1>Inventory</h1>
+    </div>
+    <br>
+    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Mobile</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="products?.length != 0">
+            <tr *ngFor="let product of products">
+                <td>{{product.productName}}</td>
+                <td>{{product.mobile}}</td>
+                <td>{{product.city}}</td>
+            </tr>
+        </tbody>
+    <tbody *ngIf="products?.length == 0">
+        <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+        </tr>
+    </tbody>
+    </table>
+</div>

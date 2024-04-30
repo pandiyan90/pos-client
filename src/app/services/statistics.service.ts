@@ -17,7 +17,7 @@ export class StatisticsService {
   billList$: BehaviorSubject<Bill[]> = this.billService.list$;
   customerList$: BehaviorSubject<Customer[]> = this.customerService.list$;
   orderList$: BehaviorSubject<Order[]> = this.orderService.list$;
-  productList$: BehaviorSubject<Product[]> = this.productService.list$;
+  //productList$: BehaviorSubject<Product[]> = this.productService.list$;
 
 
   numberOfAllBills$: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
@@ -47,9 +47,9 @@ export class StatisticsService {
     this.numberOfAllOrders$.next(-1);
     this.setNumberOfAllOrders();
     //For products
-    this.productService.getAll();
-    this.numberOfAllProducts$.next(-1);
-    this.setNumberOfAllProducts();
+    //this.productService.getAll();
+    //this.numberOfAllProducts$.next(-1);
+    //this.setNumberOfAllProducts();
   }
 
   setNumberOfAllBills(): void {
@@ -71,9 +71,9 @@ export class StatisticsService {
   }
 
   setNumberOfAllProducts(): void {
-    this.productList$.subscribe(
-      productList => this.numberOfAllProducts$
-        .next(productList.length));
+    //this.productList$.subscribe(
+      //productList => this.numberOfAllProducts$
+        //.next(productList.length));
   }
 
 
