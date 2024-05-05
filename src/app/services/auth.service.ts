@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthService {
    * @returns
    */
   login(postData : any){
-    return this._http.post(environment.baseUrl + '/auth/signin', postData, {observe : 'response'});
+    return this._http.post(environment.apiUrl + '/auth/signin', postData, {observe : 'response'});
   }
 
 
@@ -31,11 +31,11 @@ export class AuthService {
    * @returns
    */
   forgetPassword(postData : any){
-    return this._http.post(environment.baseUrl + '/forget-password', postData, {observe : 'response'})
+    return this._http.post(environment.apiUrl + '/forget-password', postData, {observe : 'response'})
   }
 
   checkLogin(){
-    return this._http.get(environment.baseUrl + '/check-login', {observe : 'response'})
+    return this._http.get(environment.apiUrl + '/check-login', {observe : 'response'})
   }
 
   logout() {

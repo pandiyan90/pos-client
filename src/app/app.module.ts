@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTablesModule } from 'angular-datatables';
 
-import { ProductComponent } from './components/inventory/product/product.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -31,11 +30,12 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
 
 import { FilterPipe } from './pipe/filter.pipe';
 import { SorterPipe } from './pipe/sorter.pipe';
+import { MaterialModule } from './material.module';
+import { MenuComponent } from './components/appmenu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent,
     NavbarComponent,
     LoginComponent,
     HomeComponent,
@@ -49,6 +49,7 @@ import { SorterPipe } from './pipe/sorter.pipe';
     BillComponent,
     ProductListComponent,
     CustomerListComponent,
+    MenuComponent,
     FilterPipe,
     SorterPipe
   ],
@@ -67,7 +68,8 @@ import { SorterPipe } from './pipe/sorter.pipe';
     ToastrModule.forRoot({
       positionClass :'toast-top-right'
     }),
-    DataTablesModule
+    DataTablesModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
