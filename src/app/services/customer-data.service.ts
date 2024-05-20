@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Order } from '../components/orders/order.model';
 import { DatePipe } from '@angular/common';
+import { CustomerOrder } from '../model/CustomerOrder';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerDataService {
-  order: Order[] = [
+  order: CustomerOrder[] = [
     {
       orderNumber: 101,
       customerName: 'Vikas',

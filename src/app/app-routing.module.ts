@@ -11,7 +11,7 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
 import { ListingBillComponent } from './components/listing-bill/listing-bill.component';
 import { EditBillComponent } from './components/edit-bill/edit-bill.component';
 import { BillComponent } from './components/bill/bill.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { authGuard } from './guard/auth.guard';
 import { MaterialModule } from './material.module';
@@ -54,16 +54,12 @@ const routes: Routes = [
     component: EditBillComponent
   },
   {
-    path: 'product-list',
-    component: ProductListComponent
+    path: 'product',
+    component: ProductComponent
   },
   {
     path: 'customers',
     component: CustomerListComponent
-  },
-  {
-    path : 'inventory',
-    loadChildren : () => import('./components/inventory/inventory.module').then(m => m.InventoryModule)
   },
   {
     path: '**',

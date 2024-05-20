@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BillService } from 'src/app/services/bill.service';
 
 @Component({
   selector: 'app-bill',
@@ -6,33 +8,82 @@ import { Component } from '@angular/core';
   styleUrls: ['./bill.component.scss']
 })
 export class BillComponent {
-  itemName!: string;
-  itemPrice!: number;
-  itemQuantity!: number;
-  items: { name: string, price: number, quantity: number }[] = [];
+  invoice = {
+    from: '',
+    billingAddress: '',
+    shippingAddress: '',
+    authorized: '',
+    vehicle: '',
+    discountPercentage: 0,
+    items: [
+      { product: { code: 'P001', name: 'Product 1' }, quantity: 1, price: 100, totalPrice: 100, department: 'Dept 1' },
+      { product: { code: 'P002', name: 'Product 2' }, quantity: 2, price: 150, totalPrice: 300, department: 'Dept 2' }
+    ]
+  };
+  searchTerm: string = '';
+
+  itemForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private billService: BillService) {
+    this.itemForm = this.fb.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      price: [{ value: 0, disabled: true }],
+      quantity: [1, Validators.required],
+      totalPrice: [{ value: 0, disabled: true }]
+    });
+  }
+
+  calculateTotalItems() {
+    return this.invoice.items.length;
+  }
+
+  calculateTotalQuantity() {
+    return this.invoice.items.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  calculateGrossAmount() {
+    return this.invoice.items.reduce((sum, item) => sum + item.totalPrice, 0);
+  }
+
+  calculateTax() {
+    return this.calculateGrossAmount() * 0.1;
+  }
+
+  calculateNetAmount() {
+    const gross = this.calculateGrossAmount();
+    const discount = (this.invoice.discountPercentage / 100) * gross;
+    const tax = this.calculateTax();
+    return gross - discount + tax;
+  }
 
   addItem() {
-    // Add item to the list
-    this.items.push({ name: this.itemName, price: this.itemPrice, quantity: this.itemQuantity });
+    const item = this.itemForm.value;
+    item.totalPrice = item.quantity * item.price;
+    this.invoice.items.push(item);
+    this.itemForm.reset();
   }
 
-  calculateSubtotal(): number {
-    // Calculate subtotal
-    return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  filteredItems() {
+    if (!this.searchTerm) {
+      return this.invoice.items;
+    }
+    return this.invoice.items.filter(item => 
+      item.product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
-  calculateTax(): number {
-    // Calculate tax (10%)
-    return this.calculateSubtotal() * 0.1;
+  saveData(data: any): void {
+    this.billService.saveData(data).subscribe(
+      response => {
+        console.log('Data saved successfully:', response);
+        // Optionally handle success response
+      },
+      error => {
+        console.error('Error saving data:', error);
+        // Optionally handle error response
+      }
+    );
   }
 
-  calculateTotal(): number {
-    // Calculate total (subtotal + tax)
-    return this.calculateSubtotal() + this.calculateTax();
-  }
-
-  processPayment() {
-    // Logic to process payment
-    console.log('Payment processed!');
-  }
 }

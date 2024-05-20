@@ -25,7 +25,7 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
 import { ListingBillComponent } from './components/listing-bill/listing-bill.component';
 import { EditBillComponent } from './components/edit-bill/edit-bill.component';
 import { BillComponent } from './components/bill/bill.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 
 import { FilterPipe } from './pipe/filter.pipe';
@@ -47,7 +47,7 @@ import { MenuComponent } from './components/appmenu/menu.component';
     ListingBillComponent,
     EditBillComponent,
     BillComponent,
-    ProductListComponent,
+    ProductComponent,
     CustomerListComponent,
     MenuComponent,
     FilterPipe,
@@ -55,6 +55,7 @@ import { MenuComponent } from './components/appmenu/menu.component';
   ],
   imports: [
     BrowserModule,
+    DataTablesModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -68,7 +69,6 @@ import { MenuComponent } from './components/appmenu/menu.component';
     ToastrModule.forRoot({
       positionClass :'toast-top-right'
     }),
-    DataTablesModule,
     MaterialModule
   ],
   providers: [],

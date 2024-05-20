@@ -16,7 +16,7 @@
     @ViewChild(DataTableDirective, {static: false})
     datatableElement?: DataTableDirective;
 
-    dtOptions: Config = {};
+    dtOptions: any = {};
     //dtTrigger: Subject<any> = new Subject<any>();
 
     closeResult!: string;
@@ -60,11 +60,12 @@
 
     ngOnInit() {
       this.dtOptions = {
+        search: true,
         pagingType: 'full_numbers',
         pageLength: 10,
         serverSide: true,
         processing: true,
-        ajax: (dataTablesParameters: any, callback) => {
+        ajax: (dataTablesParameters: any, callback: (arg0: { recordsTotal: number; recordsFiltered: number; data: never[]; }) => void) => {
           this.orders = this.customerDataService.getCustomers();
           callback({
             recordsTotal: this.orders.length,

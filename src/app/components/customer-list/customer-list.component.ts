@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Customer} from './customer';
 import { Config } from 'datatables.net';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
 
 class DataTablesResponse {
   data: any[] = [];
@@ -16,7 +17,7 @@ class DataTablesResponse {
   styleUrl: './customer-list.component.scss'
 })
 export class CustomerListComponent implements OnInit {
-  dtOptions: Config = {};
+  dtOptions: any = {};
   customers: Customer[] = [];
 
   constructor(private http: HttpClient) {
@@ -31,7 +32,7 @@ export class CustomerListComponent implements OnInit {
       pageLength: 10,
       serverSide: true,
       processing: true,
-      ajax: (dataTablesParameters: any, callback) => {
+      ajax: (dataTablesParameters: any, callback: any) => {
         that.customers = [{
             "customerNumber": 11,
             "customerName": "customerName",

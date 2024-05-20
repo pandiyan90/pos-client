@@ -20,12 +20,16 @@ export class BaseService<T extends { id: number }> {
     this.entityName = entityName;
   }
 
+  getApiUrl() {
+    return `${this.config.apiUrl}/${this.entityName}`;
+  }
+
   getAll(): void {
     this.http.get<T[]>(`${this.config.apiUrl}/${this.entityName}`)
-      .subscribe(
-        list => this.list$.next(list),
-        err => console.error(err)
-      );
+      .subscribe({
+        next: (list) => this.list$.next(list),
+        error: (err) => console.error(err),
+      });
   }
 
   get(id: number): Observable<T> {

@@ -1,30 +1,96 @@
-<nav class="navbar navbar-default navbar-dark">
-    <div class="content-container">
-        <ul class="nav navbar-nav">
-            <h2>Billing</h2>
-        </ul>
-      <div>
-      <!-- Input fields for item details (name, price, quantity) -->
-      <input type="text" placeholder="Item Name" [(ngModel)]="itemName">
-      <input type="number" placeholder="Price" [(ngModel)]="itemPrice">
-      <input type="number" placeholder="Quantity" [(ngModel)]="itemQuantity">
-      <button (click)="addItem()">Add Item</button>
+<div class="content-container">
+  <!-- Invoice Header -->
+  <div class="invoice-top">
+    <div class="invoice-left">
+      <div class="form-group">
+        <label class="invoice-label" for="from">From:</label>
+        <input type="text" id="from" name="from" [(ngModel)]="invoice.from" required>
+      </div>
+      <div class="form-group">
+        <label class="invoice-label" for="billingAddress">Billing Address:</label>
+        <textarea id="billingAddress" name="billingAddress" [(ngModel)]="invoice.billingAddress"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="invoice-label" for="shippingAddress">Shipping Address:</label>
+        <textarea id="shippingAddress" name="shippingAddress" [(ngModel)]="invoice.shippingAddress"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="invoice-label" for="authorized">Authorized By:</label>
+        <input type="text" id="authorized" name="authorized" [(ngModel)]="invoice.authorized">
+      </div>
+      <div class="form-group">
+        <label class="invoice-label" for="vehicle">Vehicle No.:</label>
+        <input type="text" id="vehicle" name="vehicle" [(ngModel)]="invoice.vehicle">
+      </div>
     </div>
-    <div>
-      <!-- Display added items -->
-      <ul>
-        <li *ngFor="let item of items">{{ item.name }} - {{ item.price }} x {{ item.quantity }}</li>
-      </ul>
-    </div>
-    <div>
-      <!-- Display subtotal, tax, and total -->
-      <p>Subtotal: {{ calculateSubtotal() }}</p>
+    <div class="invoice-right">
+      <h3>Summary</h3>
+      <p>Total Items: {{ calculateTotalItems() }}</p>
+      <p>Total Qty: {{ calculateTotalQuantity() }}</p>
+      <p>Gross Amount: {{ calculateGrossAmount() }}</p>
+      <p>Discount: {{ invoice.discountPercentage }}%</p>
       <p>Tax (10%): {{ calculateTax() }}</p>
-      <p>Total: {{ calculateTotal() }}</p>
-    </div>
-    <div>
-      <!-- Button to process payment -->
-      <button (click)="processPayment()">Process Payment</button>
+      <p>Net Amount: {{ calculateNetAmount() }}</p>
     </div>
   </div>
-</nav>
+
+  <!-- Add Item Form -->
+  <div class="invoice-particulars">
+    <h2>Add Item</h2>
+    <form [formGroup]="itemForm" (ngSubmit)="addItem()">
+      <div class="item-details">
+        <div class="form-group">
+          <label for="code">Product Code:</label>
+          <input type="text" id="code" formControlName="code" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Product Name:</label>
+          <input type="text" id="name" formControlName="name" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Unit Price:</label>
+          <input type="number" id="price" formControlName="price" [disabled]=true>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" formControlName="quantity" required>
+        </div>
+        <div class="form-group">
+          <label for="totalPrice">Total Price:</label>
+          <input type="number" id="totalPrice" formControlName="totalPrice" [disabled]=true>
+        </div>
+      </div>
+      <button type="submit">Add Item</button>
+    </form>
+  </div>
+
+  <!-- Invoice Items Table -->
+  <div class="invoice-items">
+    <h2>Invoice Items</h2>
+    <div class="form-group">
+      <input type="text" id="search" [(ngModel)]="searchTerm" placeholder="Enter product name to search">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Code</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total Price</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredItems()">
+          <td><input type="text" [(ngModel)]="item.product.code" [disabled]=true></td>
+          <td><input type="text" [(ngModel)]="item.product.name" [disabled]=true></td>
+          <td><input type="number" [(ngModel)]="item.quantity"></td>
+          <td><input type="number" [(ngModel)]="item.price" [disabled]=true></td>
+          <td><input type="number" [(ngModel)]="item.totalPrice" [disabled]=true></td>
+          <td><input type="text" [(ngModel)]="item.department" [disabled]=true></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
