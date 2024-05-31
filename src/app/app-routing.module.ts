@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'reports',
     loadChildren: () => import('./components/sales-report/sales-report.module').then(m => m.SalesReportModule)
   },
+  {
+    path: 'master',
+    loadChildren: () => import('./components/master/master.module').then(m => m.MasterModule)
+  },
   { path: 'logout', component: LogoutComponent },
   {
     path: 'login',

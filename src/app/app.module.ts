@@ -55,6 +55,7 @@ import { MenuComponent } from './components/appmenu/menu.component';
   ],
   imports: [
     BrowserModule,
+    MaterialModule,
     DataTablesModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -68,8 +69,7 @@ import { MenuComponent } from './components/appmenu/menu.component';
     NgbModalModule,
     ToastrModule.forRoot({
       positionClass :'toast-top-right'
-    }),
-    MaterialModule
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

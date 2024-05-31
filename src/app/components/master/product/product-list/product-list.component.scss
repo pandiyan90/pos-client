@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@ag-grid-community/styles/ag-grid.css";
+@import "~@ag-grid-community/styles/ag-theme-alpine.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f5f5f5; }
+
+.container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-toolbar .spacer {
+  flex: 1 1 auto;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.mat-card {
+  margin: 20px 0;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}
+
+.mat-form-field {
+  width: 300px;
+}
+
+.mat-paginator {
+  margin-top: 20px;
+}

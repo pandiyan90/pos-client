@@ -4,6 +4,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/model/product';
 import { HttpClient } from '@angular/common/http';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-product',
@@ -17,10 +20,27 @@ export class ProductComponent implements OnInit, AfterViewInit, OnDestroy {
   product: Product = new Product();
   products: Product[] = [];
 
+  // datasource: MatTableDataSource<Product>;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatSort) sort: MatSort;
+  // matColumns = ['id', 'code', 'name', 'description', 'type', 'purchasePrice', 'manufacturer', 'salePrice', 'unit', 'department', 'mrp', 'inventory'];
+
   constructor(private http: HttpClient, private productService: ProductService) { }
 
   ngOnInit(): void {
+    //this.loadMatTableData();
+    this.loadAgTableData();
+  }
+
+  loadMatTableData() {
+    this.productService.getProducts(1, 10, '', '', '').subscribe(resp => {
+      //this.datasource = new MatTableDataSource(resp.payload)
+    });
+  }
+
+  loadAgTableData() {
     this.dtOptions = {
+      info: true,
       paging: true,
       destroy: true,
       serverSide: true,

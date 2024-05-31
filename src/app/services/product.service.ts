@@ -32,8 +32,17 @@ export class ProductService extends BaseService<Product> {
       .set('pageSize', 999);
     return this.http.get<ApiResponse<Product[]>>(this.url, { params });
   }
-  getProducts(pageNo: number, pageSize: number, search: string, sortBy: string, sortDir: string): Observable<ApiResponse<Product[]>> {
-    return this.http.post<ApiResponse<Product[]>>(this.url+'/all?pageNo='+pageNo+'&pageSize='+pageSize, {});
+
+  getProducts(pageNo: number, pageSize: number, searchTerm: string, sortBy: string, sortDir: string): Observable<ApiResponse<Product[]>> {
+    if (pageNo === 0) {
+      pageNo = 1;
+    }
+    const postData = {
+      pageNo: pageNo,
+      pageSize: pageSize,
+      searchTerm: searchTerm,
+    }
+    return this.http.post<ApiResponse<Product[]>>(this.url+'/all', postData);
   }
 
   addProduct(product: Product): Observable<Product> {

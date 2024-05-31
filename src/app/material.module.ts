@@ -31,7 +31,6 @@ import { MatListModule } from "@angular/material/list"
         MatToolbarModule,
         MatSidenavModule,
         MatListModule
-
     ]
 })
 export class MaterialModule { }
