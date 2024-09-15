@@ -1,96 +1,142 @@
-<div class="content-container">
-  <!-- Invoice Header -->
-  <div class="invoice-top">
-    <div class="invoice-left">
-      <div class="form-group">
-        <label class="invoice-label" for="from">From:</label>
-        <input type="text" id="from" name="from" [(ngModel)]="invoice.from" required>
-      </div>
-      <div class="form-group">
-        <label class="invoice-label" for="billingAddress">Billing Address:</label>
-        <textarea id="billingAddress" name="billingAddress" [(ngModel)]="invoice.billingAddress"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="invoice-label" for="shippingAddress">Shipping Address:</label>
-        <textarea id="shippingAddress" name="shippingAddress" [(ngModel)]="invoice.shippingAddress"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="invoice-label" for="authorized">Authorized By:</label>
-        <input type="text" id="authorized" name="authorized" [(ngModel)]="invoice.authorized">
-      </div>
-      <div class="form-group">
-        <label class="invoice-label" for="vehicle">Vehicle No.:</label>
-        <input type="text" id="vehicle" name="vehicle" [(ngModel)]="invoice.vehicle">
-      </div>
+<div class="container-fluid">
+  <!-- Top Part -->
+  <div class="row">
+    <!-- Create Bill and Summary -->
+    <!-- Create Bill Form -->
+    <div class="col-md-4 mb-3">
+      <h2>New Bill</h2>
+      <form>
+        <div class="form-group">
+          <label for="billingAddress">Billing Address:</label>
+          <textarea class="form-control" id="billingAddress" name="billingAddress"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="shippingAddress">Shipping Address:</label>
+          <textarea class="form-control" id="shippingAddress" name="shippingAddress"></textarea>
+        </div>
+      </form>
     </div>
-    <div class="invoice-right">
+
+    <!-- Create Bill Form Group 2 -->
+    <div class="col-md-4 mb-3">
+      <h2>&nbsp;</h2> <!-- To align with the first group -->
+      <form>
+        <div class="form-group">
+          <label for="authorized">Authorized By:</label>
+          <input type="text" class="form-control" id="authorized" name="authorized">
+        </div>
+        <div class="form-group">
+          <label for="vehicle">Vehicle No.:</label>
+          <input type="text" class="form-control" id="vehicle" name="vehicle">
+        </div>
+        <div class="form-group">
+          <label for="discount">Discount (%):</label>
+          <input type="number" class="form-control" id="discount" name="discount">
+        </div>
+      </form>
+    </div>
+
+    <!-- Summary -->
+    <div class="col-md-4 mb-3">
       <h3>Summary</h3>
-      <p>Total Items: {{ calculateTotalItems() }}</p>
-      <p>Total Qty: {{ calculateTotalQuantity() }}</p>
-      <p>Gross Amount: {{ calculateGrossAmount() }}</p>
-      <p>Discount: {{ invoice.discountPercentage }}%</p>
-      <p>Tax (10%): {{ calculateTax() }}</p>
-      <p>Net Amount: {{ calculateNetAmount() }}</p>
+      <div class="summary-box p-3 mb-3">
+        <p>Total Items: {{ calculateTotalItems() }}</p>
+        <p>Total Qty: {{ calculateTotalQuantity() }}</p>
+        <p>Gross Amount: {{ calculateGrossAmount() }}</p>
+        <p>Discount: {{ invoice.discountPercentage }}%</p>
+        <p>Tax (10%): {{ calculateTax() }}</p>
+        <p>Net Amount: {{ calculateNetAmount() }}</p>
+      </div>
+      <div class="d-flex">
+        <button type="button" class="btn btn-success me-2" (click)="saveInvoice(invoice)">Save Bill</button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+      </div>
     </div>
   </div>
 
-  <!-- Add Item Form -->
-  <div class="invoice-particulars">
-    <h2>Add Item</h2>
-    <form [formGroup]="itemForm" (ngSubmit)="addItem()">
-      <div class="item-details">
-        <div class="form-group">
-          <label for="code">Product Code:</label>
-          <input type="text" id="code" formControlName="code" required>
+  <!-- Product Section -->
+  <div class="form-group row mb-3">
+    <h2>Product</h2>
+    <form [formGroup]="itemForm" (ngSubmit)="addItem()" class="form-inline">
+      <div class="row">
+        <div class="col-md-2 mb-3">
+          <div class="form-group">
+            <label for="code">Code</label>
+              <input type="text" class="form-control" id="code" formControlName="code"
+                (keydown)="toQuantityEnter($event)"
+                (change)="onCodeChange($event)" required>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="name">Product Name:</label>
-          <input type="text" id="name" formControlName="name" required>
+        <div class="col-md-3 mb-3">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <ng-select [items]="products"
+                       bindLabel="name"
+                       bindValue="name"
+                       class="form-control"
+                       id="name"
+                       formControlName="name"
+                       [typeahead]="searchProduct"
+                       (search)="onProductSearch($event)"
+                       (change)="onProductSelect($event)"
+                       required>
+            </ng-select>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="price">Unit Price:</label>
-          <input type="number" id="price" formControlName="price" [disabled]=true>
+        <div class="col-md-1 mb-3">
+          <div class="form-group">
+            <label for="quantity">Qty</label>
+            <input type="number" class="form-control" id="quantity" formControlName="quantity" placeholder="Quantity" required>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="quantity">Quantity:</label>
-          <input type="number" id="quantity" formControlName="quantity" required>
+        <div class="col-md-1 mb-3">
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" formControlName="price" placeholder="Unit Price" [disabled]="true">
+          </div>
         </div>
-        <div class="form-group">
-          <label for="totalPrice">Total Price:</label>
-          <input type="number" id="totalPrice" formControlName="totalPrice" [disabled]=true>
+        <div class="col-md-2 mb-3">
+          <div class="form-group">
+            <label for="totalPrice">Total Price</label>
+            <input type="number" class="form-control" id="totalPrice" formControlName="totalPrice" placeholder="Total Price" [disabled]="true">
+          </div>
+        </div>
+        <div class="col-md-2 mb-3 align-self-end">
+          <button type="submit" class="btn btn-primary mb-3">Add Item</button>
         </div>
       </div>
-      <button type="submit">Add Item</button>
     </form>
   </div>
 
-  <!-- Invoice Items Table -->
-  <div class="invoice-items">
-    <h2>Invoice Items</h2>
-    <div class="form-group">
-      <input type="text" id="search" [(ngModel)]="searchTerm" placeholder="Enter product name to search">
+  <!-- Bottom Part: Invoice Items Table -->
+  <div class="row">
+    <div class="col-12">
+      <h3>Particulars</h3>
+      <div class="form-group mb-3">
+        <input type="text" class="form-control" id="search" [(ngModel)]="searchTerm" placeholder="Enter product name to search">
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            <th>Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredItems()">
+            <td><input type="text" class="form-control" [(ngModel)]="item.code" [disabled]="true"></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.name" [disabled]="true"></td>
+            <td><input type="number" class="form-control" [(ngModel)]="item.quantity" (ngModelChange)="updateItemQuantity(item)" ></td>
+            <td><input type="number" class="form-control" [(ngModel)]="item.price" [disabled]="true"></td>
+            <td><input type="number" class="form-control" [(ngModel)]="item.totalPrice" [disabled]="true"></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.department" [disabled]="true"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Product Code</th>
-          <th>Product Name</th>
-          <th>Quantity</th>
-          <th>Unit Price</th>
-          <th>Total Price</th>
-          <th>Department</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of filteredItems()">
-          <td><input type="text" [(ngModel)]="item.product.code" [disabled]=true></td>
-          <td><input type="text" [(ngModel)]="item.product.name" [disabled]=true></td>
-          <td><input type="number" [(ngModel)]="item.quantity"></td>
-          <td><input type="number" [(ngModel)]="item.price" [disabled]=true></td>
-          <td><input type="number" [(ngModel)]="item.totalPrice" [disabled]=true></td>
-          <td><input type="text" [(ngModel)]="item.department" [disabled]=true></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

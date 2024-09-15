@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class BaseService<T extends { id: number }> {
+export class BaseService<T> {
 
   entityName: string = '';
   list$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
@@ -42,15 +42,14 @@ export class BaseService<T extends { id: number }> {
       .pipe(tap((e) => this.getAll()));
   }
 
-  update(entity: T): Observable<T> {
+  update(id : number, entity: T): Observable<T> {
     return this.http
-      .patch<T>(`${this.config.apiUrl}/${this.entityName}/${entity.id}`, entity);
+      .patch<T>(`${this.config.apiUrl}/${this.entityName}/${id}`, entity);
   }
 
-  remove(entity: T | number): Observable<T> {
-    let entityId = typeof entity === 'number' ? entity : entity.id;
+  remove(id : number): Observable<T> {
     return this.http
-      .delete<T>(`${this.config.apiUrl}/${this.entityName}/${entityId}`)
+      .delete<T>(`${this.config.apiUrl}/${this.entityName}/${id}`)
   }
 
   like(key: string, value: string, limit: number = 20): Observable<T[]> {

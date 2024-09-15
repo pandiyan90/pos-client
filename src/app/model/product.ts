@@ -4,6 +4,9 @@ export class Product {
   name!: string;
   description!: string | null;
   type!: string;
+  cgstRate!: number;
+  sgstRate!: number;
+  igstRate?: number; // Optional for inter-state transactions
   purchasePrice!: number;
   manufacturer!: string | null;
   salePrice!: number;

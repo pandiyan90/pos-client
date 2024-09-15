@@ -22,15 +22,19 @@ export class ProductService extends BaseService<Product> {
     this.url = this.getApiUrl();
   }
 
-  getProduct(id: number): Observable<Product> {
+  getProduct(id: number): Observable<ApiResponse<Product>> {
     const url = this.url+`/${id}`;
-    return this.http.get<Product>(url);
+    return this.http.get<ApiResponse<Product>>(url);
   }
 
   getAllProducts(): Observable<ApiResponse<Product[]>> {
     let params = new HttpParams()
       .set('pageSize', 999);
     return this.http.get<ApiResponse<Product[]>>(this.url, { params });
+  }
+
+  searchProducts(name: string): Observable<ApiResponse<Product[]>> {
+    return this.http.get<ApiResponse<Product[]>>(this.url+'/search?name=' + name);
   }
 
   getProducts(pageNo: number, pageSize: number, searchTerm: string, sortBy: string, sortDir: string): Observable<ApiResponse<Product[]>> {

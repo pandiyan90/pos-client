@@ -44,7 +44,7 @@ export class ListingBillComponent implements OnInit {
   }
 
   onRemove(): void {
-    this.billService.remove(this.selectedBillToDelete)
+    this.billService.remove(this.selectedBillToDelete.id)
       .subscribe(
         () => {
           this.billService.getAll();

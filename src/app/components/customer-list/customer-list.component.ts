@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Customer} from './customer';
 import { Config } from 'datatables.net';

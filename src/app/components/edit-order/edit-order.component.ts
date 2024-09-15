@@ -40,7 +40,7 @@ export class EditOrderComponent implements OnInit {
         }
       );
     } else {
-      this.orderService.update(order).subscribe(
+      this.orderService.update(order.id, order).subscribe(
         () => {
           this.updating = false;
           this.router.navigate(['orders']);
