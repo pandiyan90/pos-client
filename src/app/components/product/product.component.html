@@ -1,34 +1,38 @@
-  <ng-template #preview>
-    <!-- Angular datatable -->
-    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Purchase Price</th>
-          <th>Sale Price</th>
-          <th>Department</th>
-          <th>MRP</th>
-          <th>Inventory</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="products?.length != 0">
-        <tr *ngFor="let product of products">
-          <td>{{ product.code }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.type }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.purchasePrice }}</td>
-          <td>{{ product.salePrice }}</td>
-          <td>{{ product.department }}</td>
-          <td>{{ product.mrp }}</td>
-          <td>{{ product.inventory }}</td>
-        </tr>
-      </tbody>
-    </table>
-
+<ng-template #preview>
+  <!-- Angular datatable -->
+  <table
+    datatable
+    [dtOptions]="dtOptions"
+    [dtTrigger]="dtTrigger"
+    class="row-border hover"
+  >
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Purchase Price</th>
+        <th>Sale Price</th>
+        <th>Department</th>
+        <th>MRP</th>
+        <th>Inventory</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="products?.length != 0">
+      <tr *ngFor="let product of products">
+        <td>{{ product.code }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.purchasePrice }}</td>
+        <td>{{ product.salePrice }}</td>
+        <td>{{ product.department }}</td>
+        <td>{{ product.mrp }}</td>
+        <td>{{ product.inventory }}</td>
+      </tr>
+    </tbody>
+  </table>
 </ng-template>
 
 <ng-container *ngTemplateOutlet="preview"></ng-container>

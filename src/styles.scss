@@ -1,46 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "~@ag-grid-community/styles/ag-grid.css";
-@import "~@ag-grid-community/styles/ag-theme-alpine.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.container-fluid{
-    background: #f2d5e9;
+.container-fluid {
+  background: #f2d5e9;
 }
 
 /* Ensure the container of the form doesn't hide overflow */
 .container {
-    overflow: visible;
-  }
-  
-  /* Ensure the ng-select dropdown has a higher z-index */
-  .ng-select {
-    width: 100%;
-  }
-  
-  .ng-select .ng-select-container {
-    z-index: 1000; /* Ensure the dropdown appears above other elements */
-  }
-  
-  .ng-dropdown-panel {
-    z-index: 1001; /* Ensure the dropdown panel appears above other elements */
-    position: absolute; /* Ensure it stays in the same place */
-    background-color: #fff; /* Set plain white background */
-    border: 1px solid #ccc; /* Optional: Add border to dropdown for better visibility */
-  }
-  
-  .ng-dropdown-panel .ng-dropdown-panel-items {
-    max-height: 200px; /* Limit the height of the dropdown panel */
-    overflow-y: auto; /* Enable scrolling if the content overflows */
-  }
-  
-  .ng-dropdown-panel .ng-option {
-    padding: 8px; /* Add some padding for better readability */
-    cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  .ng-dropdown-panel .ng-option:hover {
-    background-color: #f1f1f1; /* Add hover effect */
-  }
-  
+  overflow: visible;
+}
+
+/* Ensure the ng-select dropdown has a higher z-index */
+.ng-select {
+  width: 100%;
+}
+
+.ng-select .ng-select-container {
+  z-index: 1000; /* Ensure the dropdown appears above other elements */
+}
+
+.ng-dropdown-panel {
+  z-index: 1001; /* Ensure the dropdown panel appears above other elements */
+  position: absolute; /* Ensure it stays in the same place */
+  background-color: #fff; /* Set plain white background */
+  border: 1px solid #ccc; /* Optional: Add border to dropdown for better visibility */
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 200px; /* Limit the height of the dropdown panel */
+  overflow-y: auto; /* Enable scrolling if the content overflows */
+}
+
+.ng-dropdown-panel .ng-option {
+  padding: 8px; /* Add some padding for better readability */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.ng-dropdown-panel .ng-option:hover {
+  background-color: #f1f1f1; /* Add hover effect */
+}

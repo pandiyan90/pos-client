@@ -5,13 +5,12 @@ import { BaseService } from './base.service';
 import { ConfigService } from './config.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService extends BaseService<Order> {
-
   constructor(
     override config: ConfigService,
-    override http: HttpClient
+    override http: HttpClient,
   ) {
     super(config, http, 'orders');
   }

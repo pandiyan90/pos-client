@@ -59,7 +59,9 @@ label {
 }
 
 /* Layout Styles */
-.create-bill, .invoice-items, .summary {
+.create-bill,
+.invoice-items,
+.summary {
   margin-bottom: 20px;
 }
 
@@ -92,7 +94,8 @@ body {
   font-family: Arial, sans-serif;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: #343a40;
 }
 

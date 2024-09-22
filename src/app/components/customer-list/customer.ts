@@ -8,8 +8,6 @@ export class Customer {
     public city: string,
     public state: string,
     public country: string,
-    public creditLimit: number
-  ) {
-  }
-
+    public creditLimit: number,
+  ) {}
 }

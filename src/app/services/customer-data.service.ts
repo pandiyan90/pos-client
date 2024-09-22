@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { CustomerOrder } from '../model/CustomerOrder';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerDataService {
   order: CustomerOrder[] = [
@@ -13,7 +13,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -21,7 +21,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -29,7 +29,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -37,7 +37,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -45,7 +45,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -53,7 +53,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -61,7 +61,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 101,
@@ -69,7 +69,7 @@ export class CustomerDataService {
       customerAddress: 'Hyderabad',
       customerMobileNumber: 8341303459,
       orderTotal: 26,
-      orderDueDate: new Date('Jan 11, 2020')
+      orderDueDate: new Date('Jan 11, 2020'),
     },
     {
       orderNumber: 102,
@@ -77,7 +77,7 @@ export class CustomerDataService {
       customerAddress: 'LB Nagar',
       customerMobileNumber: 9866093888,
       orderTotal: 89,
-      orderDueDate: new Date('June 06, 1995')
+      orderDueDate: new Date('June 06, 1995'),
     },
     {
       orderNumber: 105,
@@ -85,7 +85,7 @@ export class CustomerDataService {
       customerAddress: 'LB Nagar',
       customerMobileNumber: 9866093888,
       orderTotal: 89,
-      orderDueDate: new Date('June 06, 1995')
+      orderDueDate: new Date('June 06, 1995'),
     },
     {
       orderNumber: 103,
@@ -93,11 +93,11 @@ export class CustomerDataService {
       customerAddress: 'Gachibowli',
       customerMobileNumber: 9812345464,
       orderTotal: 19,
-      orderDueDate: new Date('July 21, 2003')
-    }
+      orderDueDate: new Date('July 21, 2003'),
+    },
   ];
 
-  constructor() { }
+  constructor() {}
 
   addCustomer(form: any) {
     this.order.push(form.value);

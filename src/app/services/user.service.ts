@@ -1,25 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { loginresp, menu, menupermission, menus, registerconfirm, resetpassword, roles, updatepassword, updateuser, usercred, userregister, users } from '../model/user.model';
-
+import {
+  loginresp,
+  menu,
+  menupermission,
+  menus,
+  registerconfirm,
+  resetpassword,
+  roles,
+  updatepassword,
+  updateuser,
+  usercred,
+  userregister,
+  users,
+} from '../model/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   apiUrl = environment.apiUrl;
 
   _registerresp = signal<registerconfirm>({
     userid: 0,
     username: '',
-    otptext: ''
-  })
+    otptext: '',
+  });
 
-  _username=signal('');
+  _username = signal('');
 
   _menulist = signal<menu[]>([]);
 
@@ -32,11 +43,16 @@ export class UserService {
   }
 
   Proceedlogin(_data: usercred) {
-    return this.http.post<loginresp>(this.apiUrl + 'Authorize/GenerateToken', _data);
+    return this.http.post<loginresp>(
+      this.apiUrl + 'Authorize/GenerateToken',
+      _data,
+    );
   }
 
   Loadmenubyrole(role: string) {
-    return this.http.get<menu[]>(this.apiUrl + 'UserRole/GetAllMenusbyrole?userrole=' + role);
+    return this.http.get<menu[]>(
+      this.apiUrl + 'UserRole/GetAllMenusbyrole?userrole=' + role,
+    );
   }
 
   Resetpassword(_data: resetpassword) {
@@ -44,23 +60,31 @@ export class UserService {
   }
 
   Forgetpassword(username: string) {
-    return this.http.get(this.apiUrl + 'User/forgetpassword?username=' + username)
+    return this.http.get(
+      this.apiUrl + 'User/forgetpassword?username=' + username,
+    );
   }
 
   Updatepassword(_data: updatepassword) {
     return this.http.post(this.apiUrl + 'User/updatepassword', _data);
   }
 
-  Getmenupermission(role:string,menuname:string){
-    return this.http.get<menupermission>(this.apiUrl + 'UserRole/GetMenupermissionbyrole?userrole='+role+'&menucode=' + menuname)
+  Getmenupermission(role: string, menuname: string) {
+    return this.http.get<menupermission>(
+      this.apiUrl +
+        'UserRole/GetMenupermissionbyrole?userrole=' +
+        role +
+        '&menucode=' +
+        menuname,
+    );
   }
 
   Getallusers() {
     return this.http.get<users[]>(this.apiUrl + 'User/GetAll');
   }
 
-  GetUserbycode(code:string) {
-    return this.http.get<users>(this.apiUrl + 'User/GetBycode?code='+code);
+  GetUserbycode(code: string) {
+    return this.http.get<users>(this.apiUrl + 'User/GetBycode?code=' + code);
   }
 
   Getallroles() {
@@ -78,9 +102,7 @@ export class UserService {
     return this.http.get<menus[]>(this.apiUrl + 'UserRole/GetAllMenus');
   }
 
-  Assignrolepermission(_data:menupermission[]){
+  Assignrolepermission(_data: menupermission[]) {
     return this.http.post(this.apiUrl + 'UserRole/assignrolepermission', _data);
   }
-
-
 }

@@ -7,7 +7,7 @@ export interface ITableCol {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfigService {
   apiUrl: string = 'http://localhost:9000/foodlab';
@@ -25,7 +25,7 @@ export class ConfigService {
     { key: 'lastName', text: 'Vezetéknév', editable: true },
     { key: 'email', text: 'Email', editable: true },
     { key: 'address', text: 'Cím', editable: true },
-    { key: 'active', text: 'Aktív', editable: true }
+    { key: 'active', text: 'Aktív', editable: true },
   ];
 
   orderTableCols: ITableCol[] = [
@@ -47,5 +47,5 @@ export class ConfigService {
     { key: 'active', text: 'Aktív', editable: true },
   ];
 
-  constructor() { }
+  constructor() {}
 }

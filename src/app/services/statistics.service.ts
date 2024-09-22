@@ -10,28 +10,29 @@ import { OrderService } from './order.service';
 import { ProductService } from './product.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StatisticsService {
-
   billList$: BehaviorSubject<Bill[]> = this.billService.list$;
   customerList$: BehaviorSubject<Customer[]> = this.customerService.list$;
   orderList$: BehaviorSubject<Order[]> = this.orderService.list$;
   //productList$: BehaviorSubject<Product[]> = this.productService.list$;
 
-
   numberOfAllBills$: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
-  numberOfAllCustomers$: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
+  numberOfAllCustomers$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    -1,
+  );
   numberOfAllOrders$: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
-  numberOfAllProducts$: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
+  numberOfAllProducts$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    -1,
+  );
 
   constructor(
     private billService: BillService,
     private customerService: CustomerService,
     private orderService: OrderService,
     private productService: ProductService,
-  ) { }
-
+  ) {}
 
   subscribeForData(): void {
     //For bills
@@ -53,30 +54,26 @@ export class StatisticsService {
   }
 
   setNumberOfAllBills(): void {
-    this.billList$.subscribe(
-      billList => this.numberOfAllBills$
-        .next(billList.length));
+    this.billList$.subscribe((billList) =>
+      this.numberOfAllBills$.next(billList.length),
+    );
   }
 
   setNumberOfAllCustomers(): void {
-    this.customerList$.subscribe(
-      customerList => this.numberOfAllCustomers$
-        .next(customerList.length));
+    this.customerList$.subscribe((customerList) =>
+      this.numberOfAllCustomers$.next(customerList.length),
+    );
   }
 
   setNumberOfAllOrders(): void {
-    this.orderList$.subscribe(
-      orderList => this.numberOfAllOrders$
-        .next(orderList.length));
+    this.orderList$.subscribe((orderList) =>
+      this.numberOfAllOrders$.next(orderList.length),
+    );
   }
 
   setNumberOfAllProducts(): void {
     //this.productList$.subscribe(
-      //productList => this.numberOfAllProducts$
-        //.next(productList.length));
+    //productList => this.numberOfAllProducts$
+    //.next(productList.length));
   }
-
-
 }
-
-

@@ -8,15 +8,13 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    ProductListComponent
-  ],
+  declarations: [ProductListComponent],
   imports: [
     CommonModule,
     MasterRoutingModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
 })
-export class MasterModule { }
+export class MasterModule {}

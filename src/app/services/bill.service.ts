@@ -6,13 +6,12 @@ import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BillService extends BaseService<Bill> {
-
   constructor(
     override config: ConfigService,
-    override http: HttpClient
+    override http: HttpClient,
   ) {
     super(config, http, 'bills');
   }
@@ -20,5 +19,4 @@ export class BillService extends BaseService<Bill> {
   saveData(data: any): Observable<any> {
     return this.http.post<any>(this.config.apiUrl, data);
   }
-
 }

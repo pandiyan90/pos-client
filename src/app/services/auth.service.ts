@@ -3,15 +3,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   isLoggedIn = false;
   isLoggedOut = true;
   isAuthenticated: boolean = false;
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   /**
    * Function - Login
@@ -19,10 +18,11 @@ export class AuthService {
    * @param postData
    * @returns
    */
-  login(postData : any){
-    return this._http.post(environment.apiUrl + '/auth/signin', postData, {observe : 'response'});
+  login(postData: any) {
+    return this._http.post(environment.apiUrl + '/auth/signin', postData, {
+      observe: 'response',
+    });
   }
-
 
   /**
    * Function - forgetPassword()
@@ -30,12 +30,16 @@ export class AuthService {
    * @param postData
    * @returns
    */
-  forgetPassword(postData : any){
-    return this._http.post(environment.apiUrl + '/forget-password', postData, {observe : 'response'})
+  forgetPassword(postData: any) {
+    return this._http.post(environment.apiUrl + '/forget-password', postData, {
+      observe: 'response',
+    });
   }
 
-  checkLogin(){
-    return this._http.get(environment.apiUrl + '/check-login', {observe : 'response'})
+  checkLogin() {
+    return this._http.get(environment.apiUrl + '/check-login', {
+      observe: 'response',
+    });
   }
 
   logout() {
@@ -45,7 +49,6 @@ export class AuthService {
 
   checkUserAuthentication() {
     this.isLoggedOut = false;
-    return this.isAuthenticated = true;
+    return (this.isAuthenticated = true);
   }
-
 }

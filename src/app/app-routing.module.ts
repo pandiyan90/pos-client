@@ -17,21 +17,24 @@ import { authGuard } from './guard/auth.guard';
 import { MaterialModule } from './material.module';
 
 const routes: Routes = [
-  //{path:'',component:HomeComponent, canActivate:[authGuard]},
-  {path:'',component:HomeComponent},
   {
-    path : 'auth',
-    loadChildren : () => import('./components/auth/auth.module').then(m => m.AuthModule)
+    path: '',
+    component: HomeComponent,
   },
   {
-    path: 'reports',
-    loadChildren: () => import('./components/sales-report/sales-report.module').then(m => m.SalesReportModule)
+    path: 'auth',
+    loadChildren: () =>
+      import('./components/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'master',
-    loadChildren: () => import('./components/master/master.module').then(m => m.MasterModule)
+    loadChildren: () =>
+      import('./components/master/master.module').then((m) => m.MasterModule),
   },
-  { path: 'logout', component: LogoutComponent },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -39,40 +42,40 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersComponent,
-    canActivate: [ authGuard ]
+    //canActivate: [ authGuard ]
   },
   {
     path: 'orders/:id',
-    component: EditOrderComponent
+    component: EditOrderComponent,
   },
   {
     path: 'bill',
-    component: BillComponent
+    component: BillComponent,
   },
   {
     path: 'bills',
-    component: ListingBillComponent
+    component: ListingBillComponent,
   },
   {
     path: 'bill/:id',
-    component: EditBillComponent
+    component: EditBillComponent,
   },
   {
     path: 'product',
-    component: ProductComponent
+    component: ProductComponent,
   },
   {
     path: 'customers',
-    component: CustomerListComponent
+    component: CustomerListComponent,
   },
   {
     path: '**',
-    component: PageNotFoundComponent
-  }
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [MaterialModule, RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

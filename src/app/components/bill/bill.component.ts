@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.component.html',
-  styleUrls: ['./bill.component.scss']
+  styleUrls: ['./bill.component.scss'],
 })
 export class BillComponent implements OnInit {
   invoice: Invoice = {
@@ -27,7 +27,7 @@ export class BillComponent implements OnInit {
     cgst: 0,
     igst: 0,
     netAmount: 0,
-    items: [] // Initialize items as an empty array
+    items: [], // Initialize items as an empty array
   };
   searchTerm: string = '';
   searchProduct: Subject<string> = new Subject<string>();
@@ -35,7 +35,11 @@ export class BillComponent implements OnInit {
   products: Product[] = [];
   itemForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private invoiceService: InvoiceService, private productService: ProductService) {
+  constructor(
+    private fb: FormBuilder,
+    private invoiceService: InvoiceService,
+    private productService: ProductService,
+  ) {
     this.itemForm = this.fb.group({
       code: ['', Validators.required],
       name: ['', Validators.required],
@@ -49,7 +53,7 @@ export class BillComponent implements OnInit {
   ngOnInit(): void {
     this.searchProduct
       .pipe(debounceTime(1000)) // Wait for 1 second after the last event before emitting
-      .subscribe(searchTerm => {
+      .subscribe((searchTerm) => {
         if (searchTerm) {
           this.searchProducts(searchTerm);
         }
@@ -57,7 +61,7 @@ export class BillComponent implements OnInit {
   }
 
   searchProducts(name: string) {
-    this.productService.searchProducts(name).subscribe(resp => {
+    this.productService.searchProducts(name).subscribe((resp) => {
       this.products = resp.payload;
     });
   }
@@ -69,7 +73,9 @@ export class BillComponent implements OnInit {
   }
 
   onProductSelect(event: any): void {
-    const selectedProduct = this.products.find(product => product.name === event);
+    const selectedProduct = this.products.find(
+      (product) => product.name === event,
+    );
     if (selectedProduct) {
       this.itemForm.patchValue({
         code: selectedProduct.code,
@@ -82,7 +88,7 @@ export class BillComponent implements OnInit {
   onCodeChange(event: any) {
     const id = event.target.value;
     if (id) {
-      this.productService.getProduct(id).subscribe(resp => {
+      this.productService.getProduct(id).subscribe((resp) => {
         const product = resp.payload;
         this.itemForm.patchValue({
           name: product.name,
@@ -99,12 +105,18 @@ export class BillComponent implements OnInit {
   }
 
   calculateTotalQuantity() {
-    this.invoice.totalQty = this.invoice.items.reduce((sum, item) => sum + item.quantity, 0);
+    this.invoice.totalQty = this.invoice.items.reduce(
+      (sum, item) => sum + item.quantity,
+      0,
+    );
     return this.invoice.totalQty;
   }
 
   calculateGrossAmount() {
-    this.invoice.grossAmount = this.invoice.items.reduce((sum, item) => sum + item.totalPrice, 0);
+    this.invoice.grossAmount = this.invoice.items.reduce(
+      (sum, item) => sum + item.totalPrice,
+      0,
+    );
     return this.invoice.grossAmount;
   }
 
@@ -113,16 +125,20 @@ export class BillComponent implements OnInit {
   }
 
   calculateNetAmount() {
-    const discount = (this.invoice.discountPercentage / 100) * this.invoice.grossAmount;
+    const discount =
+      (this.invoice.discountPercentage / 100) * this.invoice.grossAmount;
     const tax = this.calculateTax();
     this.invoice.netAmount = this.invoice.grossAmount - discount + tax;
     return this.invoice.netAmount;
   }
 
   updateTotalPrice() {
-    this.itemForm.get('totalPrice')?.setValue(
-      this.itemForm.get('price')?.value * this.itemForm.get('quantity')?.value
-    );
+    this.itemForm
+      .get('totalPrice')
+      ?.setValue(
+        this.itemForm.get('price')?.value *
+          this.itemForm.get('quantity')?.value,
+      );
   }
 
   addItem() {
@@ -135,7 +151,7 @@ export class BillComponent implements OnInit {
       item.totalPrice = item.price * item.quantity;
 
       const existingItemIndex = this.invoice.items.findIndex(
-        existingItem => existingItem.code === item.code
+        (existingItem) => existingItem.code === item.code,
       );
 
       if (existingItemIndex !== -1) {
@@ -157,8 +173,8 @@ export class BillComponent implements OnInit {
     if (!this.searchTerm) {
       return this.invoice.items;
     }
-    return this.invoice.items.filter(item =>
-      item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    return this.invoice.items.filter((item) =>
+      item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
     );
   }
 
@@ -166,17 +182,17 @@ export class BillComponent implements OnInit {
     // Recalculate total price based on updated quantity
     item.totalPrice = item.price * item.quantity;
   }
-  
+
   saveInvoice(data?: any): void {
     this.invoiceService.saveInvoice(data).subscribe(
-      response => {
+      (response) => {
         console.log('Data saved successfully:', response);
         // Optionally handle success response
       },
-      error => {
+      (error) => {
         console.error('Error saving data:', error);
         // Optionally handle error response
-      }
+      },
     );
   }
 
@@ -185,7 +201,10 @@ export class BillComponent implements OnInit {
       // Prevent form submission
       event.preventDefault();
 
-      if (this.itemForm.get('name')?.value || this.itemForm.get('code')?.value) {
+      if (
+        this.itemForm.get('name')?.value ||
+        this.itemForm.get('code')?.value
+      ) {
         // Focus the "Quantity" field
         document.getElementById('quantity')?.focus();
       }
@@ -196,5 +215,4 @@ export class BillComponent implements OnInit {
     this.itemForm.reset();
     // Any additional reset logic
   }
-  
 }

@@ -5,8 +5,8 @@ import { UserService } from '../services/user.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   let router = inject(Router);
-  let toastr = inject(ToastrService)
-  let service = inject(UserService)
+  let toastr = inject(ToastrService);
+  let service = inject(UserService);
 
   let menuname = '';
 
@@ -16,8 +16,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (localStorage.getItem('username') != null) {
     let userrole = localStorage.getItem('userrole') as string;
-    if(menuname!=''){
-      service.Getmenupermission(userrole, menuname).subscribe(item => {
+    if (menuname != '') {
+      service.Getmenupermission(userrole, menuname).subscribe((item) => {
         if (item.haveview) {
           return true;
         } else {
@@ -25,17 +25,14 @@ export const authGuard: CanActivateFn = (route, state) => {
           router.navigateByUrl('/');
           return false;
         }
-      })
+      });
       return true;
-    }else{
+    } else {
       return true;
     }
-    
-
   } else {
     toastr.warning('Unauthorized access');
     router.navigateByUrl('/login');
     return false;
   }
-
 };

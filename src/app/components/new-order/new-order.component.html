@@ -1,47 +1,89 @@
 <ul class="nav navbar-nav navbar-right">
-    <li><button class="btn btn-success" (click)="open(content)"><i class="fa fa-plus" aria-hidden="true"></i> New</button></li>
+  <li>
+    <button class="btn btn-success" (click)="open(content)">
+      <i class="fa fa-plus" aria-hidden="true"></i> New
+    </button>
+  </li>
 </ul>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Profile</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" #f="ngForm">
-          <div class="form-group">
-              <label for="orderNumber">Order No</label>
-              <input type="number" class="form-control" id="orderNumber" formControlName="orderNumber" required>
-          </div>
-          <div class="form-group">
-            <label for="customerName">Customer Name</label>
-            <input type="text" class="form-control" id="customerName" formControlName="customerName" required>
-          </div>
-          <div class="form-group">
-            <label for="customerAddress">Address</label>
-            <input type="text" class="form-control" id="customerAddress" formControlName="customerAddress">
-        </div>
-        <div class="form-group">
-            <label for="customerMobileNumber">Mobile No</label>
-            <input type="number" class="form-control" id="customerMobileNumber" formControlName="customerMobileNumber" required> 
-        </div>
-        <div class="form-group">
-            <label for="orderTotal">Order Total</label>
-            <input type="number" class="form-control" id="orderTotal" formControlName="orderTotal" required>
-        </div>
-        <div class="form-group">
-          <label for="orderDueDate">Order Due Date</label>
-            <input type="date" id="orderDueDate" class="form-control"  formControlName="orderDueDate"  required>
-        </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
-    </div> 
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Profile</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="form-group">
+        <label for="orderNumber">Order No</label>
+        <input
+          type="number"
+          class="form-control"
+          id="orderNumber"
+          formControlName="orderNumber"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerName"
+          formControlName="customerName"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="customerAddress">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerAddress"
+          formControlName="customerAddress"
+        />
+      </div>
+      <div class="form-group">
+        <label for="customerMobileNumber">Mobile No</label>
+        <input
+          type="number"
+          class="form-control"
+          id="customerMobileNumber"
+          formControlName="customerMobileNumber"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="orderTotal">Order Total</label>
+        <input
+          type="number"
+          class="form-control"
+          id="orderTotal"
+          formControlName="orderTotal"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="orderDueDate">Order Due Date</label>
+        <input
+          type="date"
+          id="orderDueDate"
+          class="form-control"
+          formControlName="orderDueDate"
+          required
+        />
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+          Submit
+        </button>
+      </div>
     </form>
-</div>
-  </ng-template> 
-
-
-
-  
+  </div>
+</ng-template>

@@ -9,12 +9,11 @@ import { StatisticsService } from '../../services/statistics.service';
 @Component({
   selector: 'app-listing-bill',
   templateUrl: './listing-bill.component.html',
-  styleUrls: ['./listing-bill.component.scss']
+  styleUrls: ['./listing-bill.component.scss'],
 })
 export class ListingBillComponent implements OnInit {
-
-  numberOfAllBills$: BehaviorSubject<number> = this.statisticsService
-    .numberOfAllBills$;
+  numberOfAllBills$: BehaviorSubject<number> =
+    this.statisticsService.numberOfAllBills$;
 
   @Input() id: number = 0;
 
@@ -31,8 +30,8 @@ export class ListingBillComponent implements OnInit {
     private billService: BillService,
     private router: Router,
     private configService: ConfigService,
-    private statisticsService: StatisticsService
-  ) { }
+    private statisticsService: StatisticsService,
+  ) {}
 
   ngOnInit(): void {
     this.billService.getAll();
@@ -44,12 +43,10 @@ export class ListingBillComponent implements OnInit {
   }
 
   onRemove(): void {
-    this.billService.remove(this.selectedBillToDelete.id)
-      .subscribe(
-        () => {
-          this.billService.getAll();
-          this.router.navigate(['/bills']);
-        })
+    this.billService.remove(this.selectedBillToDelete.id).subscribe(() => {
+      this.billService.getAll();
+      this.router.navigate(['/bills']);
+    });
   }
 
   onChangePhrase(event: Event): void {
@@ -65,5 +62,4 @@ export class ListingBillComponent implements OnInit {
 
     this.sorterKey = key;
   }
-
 }
