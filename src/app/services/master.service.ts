@@ -22,7 +22,7 @@ export class MasterService {
   }
 
   UpdateProduct(_product: SalesProduct) {
-    let newarry = this.productlist().map((item) => {
+    const newarry = this.productlist().map((item) => {
       return item.slno === _product.slno ? _product : item;
     });
     this.productlist.set(newarry);

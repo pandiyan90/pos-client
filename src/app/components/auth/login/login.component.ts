@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
    * @param formValue
    */
   submit(formValue: any) {
-    let postData = {
+    const postData = {
       username: formValue.username,
       password: formValue.password,
     };

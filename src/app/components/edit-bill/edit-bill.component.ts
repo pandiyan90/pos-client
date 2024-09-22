@@ -10,8 +10,8 @@ import { BillService } from '../../services/bill.service';
 })
 export class EditBillComponent implements OnInit {
   bill: Bill = new Bill();
-  billId: number = 0;
-  updating: boolean = false;
+  billId = 0;
+  updating = false;
 
   constructor(
     private billService: BillService,

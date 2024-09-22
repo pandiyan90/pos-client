@@ -19,7 +19,7 @@ import { ADTSettings } from 'angular-datatables/src/models/settings';
 })
 export class ProductComponent implements OnInit, AfterViewInit, OnDestroy {
   dtOptions: ADTSettings = {};
-  dtTrigger: Subject<ADTSettings> = new Subject();
+  dtTrigger = new Subject<ADTSettings>();
 
   product: Product = new Product();
   products: Product[] = [];

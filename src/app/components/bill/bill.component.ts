@@ -29,7 +29,7 @@ export class BillComponent implements OnInit {
     netAmount: 0,
     items: [], // Initialize items as an empty array
   };
-  searchTerm: string = '';
+  searchTerm = '';
   searchProduct: Subject<string> = new Subject<string>();
 
   products: Product[] = [];

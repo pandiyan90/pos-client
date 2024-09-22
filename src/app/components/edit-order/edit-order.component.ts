@@ -15,8 +15,8 @@ import {
 })
 export class EditOrderComponent implements OnInit {
   order: Order = new Order();
-  orderId: number = 0;
-  updating: boolean = false;
+  orderId = 0;
+  updating = false;
 
   constructor(
     private modalService: NgbModal,

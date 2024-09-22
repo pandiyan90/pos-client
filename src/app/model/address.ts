@@ -1,7 +1,7 @@
 export class Address {
-  zip: number = 0;
-  country: string = '';
-  city: string = '';
-  street: string = '';
-  houseNumber: number = 0;
+  zip = 0;
+  country = '';
+  city = '';
+  street = '';
+  houseNumber = 0;
 }

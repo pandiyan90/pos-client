@@ -10,7 +10,7 @@ export interface ITableCol {
   providedIn: 'root',
 })
 export class ConfigService {
-  apiUrl: string = 'http://localhost:9000/foodlab';
+  apiUrl = 'http://localhost:9000/foodlab';
 
   billTableCols: ITableCol[] = [
     { key: 'id', text: 'id', editable: false },

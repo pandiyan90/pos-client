@@ -7,7 +7,7 @@ export class SorterPipe implements PipeTransform {
   transform(
     value: any[] | null,
     key: string,
-    direction: number = 1,
+    direction = 1,
   ): any[] | null {
     if (!Array.isArray(value) || !key) {
       return value;

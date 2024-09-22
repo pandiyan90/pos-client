@@ -10,7 +10,7 @@ import { Invoice } from '../model/invoice';
   providedIn: 'root',
 })
 export class InvoiceService extends BaseService<Invoice> {
-  url: string = '';
+  url = '';
 
   constructor(
     override config: ConfigService,

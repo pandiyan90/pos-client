@@ -25,7 +25,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   submit(formValue: any) {
-    let postData = {
+    const postData = {
       email: formValue.email,
     };
 

@@ -4,9 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  let router = inject(Router);
-  let toastr = inject(ToastrService);
-  let service = inject(UserService);
+  const router = inject(Router);
+  const toastr = inject(ToastrService);
+  const service = inject(UserService);
 
   let menuname = '';
 
@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   if (localStorage.getItem('username') != null) {
-    let userrole = localStorage.getItem('userrole') as string;
+    const userrole = localStorage.getItem('userrole') as string;
     if (menuname != '') {
       service.Getmenupermission(userrole, menuname).subscribe((item) => {
         if (item.haveview) {

@@ -12,7 +12,7 @@ import { ApiResponse } from '../model/apiresponse';
 })
 export class ProductService extends BaseService<Product> {
   products: Product[] = [];
-  url: string = '';
+  url = '';
 
   constructor(
     override config: ConfigService,
@@ -28,7 +28,7 @@ export class ProductService extends BaseService<Product> {
   }
 
   getAllProducts(): Observable<ApiResponse<Product[]>> {
-    let params = new HttpParams().set('pageSize', 999);
+    const params = new HttpParams().set('pageSize', 999);
     return this.http.get<ApiResponse<Product[]>>(this.url, { params });
   }
 

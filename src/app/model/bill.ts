@@ -1,6 +1,6 @@
 export class Bill {
-  id: number = 0;
-  orderID: number = 0;
-  amount: number = 0;
-  status: string = ''; //new | paid
+  id = 0;
+  orderID = 0;
+  amount = 0;
+  status = ''; //new | paid
 }

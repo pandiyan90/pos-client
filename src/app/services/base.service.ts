@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class BaseService<T> {
-  entityName: string = '';
+  entityName = '';
   list$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
   constructor(
@@ -55,7 +55,7 @@ export class BaseService<T> {
     );
   }
 
-  like(key: string, value: string, limit: number = 20): Observable<T[]> {
+  like(key: string, value: string, limit = 20): Observable<T[]> {
     key = `${key}_like`;
     const query = `${this.config.apiUrl}/${this.entityName}?${key}=${value}&_limit=${limit}`;
     return this.http.get<T[]>(query);

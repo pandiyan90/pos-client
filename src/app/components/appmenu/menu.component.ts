@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit, DoCheck {
   showmenu = false;
 
   ngOnInit(): void {
-    let userrole = localStorage.getItem('userrole') as string;
+    const userrole = localStorage.getItem('userrole') as string;
     this.service.Loadmenubyrole(userrole).subscribe((item) => {
       this.menulist = item;
     });
@@ -35,8 +35,8 @@ export class MenuComponent implements OnInit, DoCheck {
   }
 
   Setaccess() {
-    let userrole = localStorage.getItem('userrole');
-    let currentUrl = this.router.url;
+    const userrole = localStorage.getItem('userrole');
+    const currentUrl = this.router.url;
     if (
       currentUrl === '/register' ||
       currentUrl === '/login' ||

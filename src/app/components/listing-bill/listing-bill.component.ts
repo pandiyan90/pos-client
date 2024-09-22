@@ -15,15 +15,15 @@ export class ListingBillComponent implements OnInit {
   numberOfAllBills$: BehaviorSubject<number> =
     this.statisticsService.numberOfAllBills$;
 
-  @Input() id: number = 0;
+  @Input() id = 0;
 
   billList$: BehaviorSubject<Bill[]> = this.billService.list$;
   cols: ITableCol[] = this.configService.billTableCols;
-  phrase: string = '';
-  filterKey: string = 'amount';
+  phrase = '';
+  filterKey = 'amount';
   filterKeys: string[] = Object.keys(new Bill());
-  sorterKey: string = '';
-  sorterDirection: number = 1;
+  sorterKey = '';
+  sorterDirection = 1;
   selectedBillToDelete: Bill = new Bill();
 
   constructor(

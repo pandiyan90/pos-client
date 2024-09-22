@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
     value: any[] | null,
     key: string,
     phrase: string | number | boolean,
-  ): Array<any> | null {
+  ): any[] | null {
     if (!Array.isArray(value) || !key || !phrase) {
       return value;
     }

@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   isLoggedIn = false;
   isLoggedOut = true;
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
 
   constructor(private _http: HttpClient) {}
 

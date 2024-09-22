@@ -23,11 +23,11 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 export class ProductListComponent implements OnInit, OnDestroy {
   product: Product = new Product();
   products: Product[] = [];
-  totalRecords: number = 0;
-  currentPage: number = 1;
-  pageSize: number = 10;
+  totalRecords = 0;
+  currentPage = 1;
+  pageSize = 10;
   pageSizeOptions = [5, 10, 25, 50, 100];
-  searchTerm: string = '';
+  searchTerm = '';
 
   dtTrigger: Subject<any> = new Subject<any>();
   searchSubject: Subject<string> = new Subject<string>();
